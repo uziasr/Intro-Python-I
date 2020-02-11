@@ -9,6 +9,7 @@ and does the following:
  - If the user doesn't specify any input, your program should
    print the calendar for the current month. The 'datetime'
    module may be helpful for this.
+
  - If the user specifies one argument, assume they passed in a
    month and render the calendar for that month of the current year.
  - If the user specifies two arguments, assume they passed in
@@ -31,13 +32,28 @@ import sys
 import calendar
 from datetime import datetime
 
-print(help(datetime.time()))
+this_date = datetime.date(datetime.now())
 
-user_input = input('Please enter month and year ')
-if len(user_input.split(' '))==2:
-  month, year = user_input.split(' ')
-print(month,year)
+def month_year(month, year):
+  cal = calendar.TextCalendar(calendar.SUNDAY)
+  print(cal.formatmonth((year),month))
 
-def month_year(month=0, year=0):
- user_input = input('14_cal.py [month] [year]')
 
+def is_num(month=this_date.month, year=this_date.year):
+  try:
+    int(month)
+    int(year)
+    month_year(int(month), int(year))
+  except:
+    print('please enter month and year in numerical format')
+
+
+user_input = (sys.argv)[1:]
+if len(user_input)==2:
+  month, year = user_input
+  is_num(month, year)
+elif len(user_input)==1:
+  month = user_input[0]
+  is_num(month)  
+else:
+  is_num()
