@@ -24,6 +24,6 @@ f.close()
 # YOUR CODE HERE
 
 with open('Intro-Python-I/src/bar.txt', 'w') as fw:
-
+    
     for i in range(1,4):
         fw.writelines('hello there this is line {} \n'.format(i))
